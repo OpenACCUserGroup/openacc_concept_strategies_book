@@ -1,0 +1,25 @@
+# Makefile for mandelbrot area code
+
+CC=     cc -O3
+#LIB=	-lm
+
+#
+# Object files
+#
+OBJ=    area.ser.o
+
+#
+# Compile
+#
+area.ser:   $(OBJ)
+	$(CC) -o $@ $(OBJ) $(LIB)
+
+.c.o:
+	$(CC) -c $<
+
+#
+# Clean out object files and the executable.
+#
+clean:
+	rm -fr *.o area.ser
+

@@ -1,0 +1,27 @@
+# Makefile for mandelbrot area code
+#
+# Fortran compiler and options for GNU 
+#
+#FC=	gfortran -O3 -fopenmp
+FC=     ftn -O3 -mp
+ 
+#
+# Object files
+#
+OBJ=	area.omp.o
+
+#
+# Compile
+#
+.SUFFIXES:	.f90 .o
+area.omp:	$(OBJ)
+	$(FC) -o $@ $(OBJ) 
+
+.f90.o:
+	$(FC) -c $< 
+
+#
+# Clean out object files and the executable.
+#
+clean:
+	rm *.o area.omp

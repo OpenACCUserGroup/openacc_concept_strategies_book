@@ -1,0 +1,27 @@
+# Makefile for mandelbrot area code
+#
+# Fortran compiler and options for GNU 
+#
+#FC=	gfortran -O3 -fopenacc
+FC=     ftn -O3 -acc -ta=nvidia -Minfo=accel
+ 
+#
+# Object files
+#
+OBJ=	area.acc.o
+
+#
+# Compile
+#
+.SUFFIXES:	.f90 .o
+area.acc:	$(OBJ)
+	$(FC) -o $@ $(OBJ) 
+
+.f90.o:
+	$(FC) -c $< 
+
+#
+# Clean out object files and the executable.
+#
+clean:
+	rm *.o area.acc

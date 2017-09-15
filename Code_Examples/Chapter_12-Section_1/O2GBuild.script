@@ -1,0 +1,45 @@
+#! /bin/bash
+if [ $# -ge 2 ]; then
+	inputSize=$1
+	verLevel=$2
+elif [ $# -eq 1 ]; then
+	inputSize=$1
+	verLevel=0
+else
+	inputSize=8
+	verLevel=0
+fi
+
+openarcrt="${openarc}/openarcrt"
+openarclib="${openarc}/lib"
+
+if [ ! -f "openarcConf.txt" ]; then
+    cp "openarcConf_NORMAL.txt" "openarcConf.txt"
+fi
+
+if [ "$inputSize" != "" ]; then
+    mv "openarcConf.txt" "openarcConf.txt_tmp"
+    cat "openarcConf.txt_tmp" | sed "s|__inputSize__|${inputSize}|g" > "openarcConf.txt"
+    rm "openarcConf.txt_tmp"
+fi
+
+if [ "$openarcrt" != "" ]; then
+    mv "openarcConf.txt" "openarcConf.txt_tmp"
+    cat "openarcConf.txt_tmp" | sed "s|__openarcrt__|${openarcrt}|g" > "openarcConf.txt"
+    rm "openarcConf.txt_tmp"
+fi
+
+java -classpath $openarclib/cetus.jar:$openarclib/antlr.jar openacc.exec.ACC2GPUDriver -verbosity=${verLevel} -gpuConfFile=openarcConf.txt *.c
+echo ""
+echo "====> To compile the translated output file:"
+echo "\$ make"
+echo ""
+echo "====> To run the compiled binary:"
+echo "\$ cd bin; fft2d_ACC"
+echo ""
+if [ -f "./cetus_output/openarc_kernel.cl" ]; then
+	cd ./cetus_output
+	cp "openarc_kernel.cl" "openarc_kernel.tmp"
+	cat "openarc_kernel.tmp" | sed '/cl_khr_fp64/d' > "openarc_kernel.cl"
+	rm "openarc_kernel.tmp"
+fi
