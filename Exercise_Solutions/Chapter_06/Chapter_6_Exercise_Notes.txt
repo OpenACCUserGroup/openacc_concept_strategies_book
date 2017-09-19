@@ -1,0 +1,7 @@
+1)  This question requires the student to replace the random initialization of the temp[] and rho[] arrays on line 140 of ThermoTables_OpenACC_Optimized.C with a small set of hard coded values.   At the end of the program, the student should print the resulting pres[] values to the screen.   For all temperature and density input values the resulting pressure values should be identical, regardless of whether the code is run on the CPU or accelerator.
+
+2) An if(nbData<1000) conditional clause should be added to all acc pragmas in the main iteration loop, lines 150, 151, 156.
+
+3) The implementation of an autotuning class is a very open-ended question.  Building on the previous question, the student must implement conditional execution of the acc pragmas within the main interation loop, starting on line 150.  At a minimum, the student should execute one trial execution of the CPU, and one trial execution on the GPU to obtain the necessary comparative timing data.  If the trial CPU execution time is less than the trial GPU time the conditional statement should be set to false, and it should be set to true otherwise.  It is the students choice whether the trial executions should occur within the main iteration loop or outside.  
+
+4) No, it is not possible to expose additional parallelism in the bisection() method.  The bisection algorithm has loop-carried dependencies on the iMid, iMin, and iMax variables. 
