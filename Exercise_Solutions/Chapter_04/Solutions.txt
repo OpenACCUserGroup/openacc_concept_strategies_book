@@ -1,0 +1,32 @@
+Exercise 1:
+-----------
+Solution provided in Code Example folder for this chapter. This exercise is basically a recap of the steps from the chapter.
+
+Exercise 2:
+-----------
+The size of the plate is limited by the amount of addressable memory on the compute device. 
+
+The amount of memory required can be calculated as:
+Memory_req= 2 copies of the matrices * (WIDTH + 2) * (HEIGHT + 2) * 8 bytes per double
+
+In case of the 1000x1000 plates from the example this turns into
+Memory_req= 2 * 1002 * 1002 * 8 = 16,064,064 = 15.32 MiB
+
+So, if one turns this equation around (and assumes squared shaped plates for simplicity):
+HEIGHT = WIDTH = sqrt(Mem_avail/16) - 2
+
+In case of 12 GiB of device memory this results in: sqrt(12/16 * 2^30) - 2 = sqrt(3/4)*2^15 - 2 = 28,375
+
+Please keep in mind that you probably cannot use all available device memory (since some part is use for bookkeeping and such).
+
+Exercise 3:
+-----------
+this is similar to Exercise 2 but with a cube instead of a rectangle/square.
+
+Exercise 4:
+-----------
+Compared to the main loop the input and output routines are insignificant. There is no significant speedup for the overall application to expect.
+
+Exercise 5:
+-----------
+Solution provided in the Code Example folder. The performance comparison is, however, completely depending on the used hardware.
