@@ -28,23 +28,25 @@ int main(){
  *
  *     Inner loop has the iteration z=z*z+c, and threshold test
  */
-#pragma acc parallel loop reduction(+:numoutside) private(c,z,iter,ztemp,i,j,found)
+#pragma acc parallel loop reduction(+:numoutside) private(i,j) 
   for (i=0; i<NPOINTS; i++) {
-    #pragma loop
+#pragma acc loop vector private(c,z,found,c,z,iter,ztemp)
     for (j=0; j<NPOINTS; j++) {
       c.real = -2.0+2.5*(double)(i)/(double)(NPOINTS)+1.0e-7;
       c.imag = 1.125*(double)(j)/(double)(NPOINTS)+1.0e-7;
-      z=c;
+      z.real=c.real;
+      z.imag=c.imag;
       found  = 0;
-      for (iter=0; iter<MAXITER; iter++){
+      iter = 0;
+      while(iter<MAXITER && found == 0){
 	ztemp=(z.real*z.real)-(z.imag*z.imag)+c.real;
 	z.imag=z.real*z.imag*2+c.imag; 
 	z.real=ztemp; 
 	if ((z.real*z.real+z.imag*z.imag)>4.0e0 && found == 0) {
 	  numoutside++; 
           found = 1;
-//	  break;
 	}
+	iter =  iter + 1;
       }
     }
   }

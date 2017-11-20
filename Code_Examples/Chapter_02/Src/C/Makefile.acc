@@ -1,6 +1,7 @@
 # Makefile for mandelbrot area code
 
-CC=     cc -O3 -acc -ta=nvidia -Minfo=accel
+#CC= gcc -O3 -fopenmp 
+CC=     pgcc -O3 -acc -ta=nvidia -Minfo=accel 
 #LIB=	-lm
 
 #

@@ -3,7 +3,7 @@
 # Fortran compiler and options for GNU 
 #
 #FC=	gfortran -O3 -fopenmp
-FC=     ftn -O3 -mp
+FC=     pgf90 -O3 -mp
  
 #
 # Object files

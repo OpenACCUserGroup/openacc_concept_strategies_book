@@ -3,7 +3,7 @@
 # Fortran compiler and options for GNU 
 #
 #FC=	gfortran -O3 -fopenacc
-FC=     ftn -O3 -acc -ta=nvidia -Minfo=accel
+FC=     pgf90 -O3 -acc -ta=nvidia -Minfo=accel
  
 #
 # Object files

@@ -21,9 +21,9 @@ program area_mandelbrot
 
   call cpu_time(starttime)
   
-  !$acc parallel loop gang reduction(+:numoutside) private(c,z,iter,i,j,found)
+  !$acc parallel loop gang reduction(+:numoutside)
   do i = 0,npoints-1
-     !$acc loop vector
+     !$acc loop vector private(c,z,iter,found)
      do j= 0,npoints-1 
         c = cmplx(-2.0+(2.5*i)/npoints + 1.0d-07,(1.125*j)/npoints + 1.0d-07)
         z = c
