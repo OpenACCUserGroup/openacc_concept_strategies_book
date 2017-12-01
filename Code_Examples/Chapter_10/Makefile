@@ -7,7 +7,7 @@ CXXFLAGS=-ta=tesla:pinned -Minfo=all
 OPENCV_FLAGS=-lopencv_highgui -lopencv_core
 
 filter.x: filter.o main.o
-	$(CXX) $(CXXFLAGS) -mp $^ $(OPENVC_FLAGS) -lm -o $@ -Mcuda -Minfo=all
+	$(CXX) $(CXXFLAGS) -mp $^ $(OPENCV_FLAGS) -lm -o $@ -Mcuda -Minfo=all
 
 .SUFFIXES: .o .cpp .c
 .cpp.o: 
