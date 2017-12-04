@@ -133,7 +133,7 @@ void blur5_update(unsigned restrict char *imgData, unsigned restrict char *out, 
   float scale = 1.0 / 35.0;
    
   long blocksize = h/ nblocks;
-#pragma acc data create(imgData[w*h*ch],out[w*h*ch]) copyin(filter)
+#pragma acc data create(imgData[w*step],out[w*step]) copyin(filter)
   {
   for ( long blocky = 0; blocky < nblocks; blocky++)
   {
@@ -188,7 +188,7 @@ void blur5_pipelined(unsigned restrict char *imgData, unsigned restrict char *ou
   float scale = 1.0 / 35.0;
    
   long blocksize = h/ nblocks;
-#pragma acc data create(imgData[w*h*ch],out[w*h*ch])
+#pragma acc data create(imgData[w*step],out[w*step])
   {
   for ( long blocky = 0; blocky < nblocks; blocky++)
   {
