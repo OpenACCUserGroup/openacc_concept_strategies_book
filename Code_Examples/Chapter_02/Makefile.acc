@@ -1,0 +1,26 @@
+# Makefile for mandelbrot area code
+
+#CC= gcc -O3 -fopenmp 
+CC=     pgcc -O3 -acc -ta=nvidia -Minfo=accel 
+#LIB=	-lm
+
+#
+# Object files
+#
+OBJ=    area.acc.o
+
+#
+# Compile
+#
+area.acc:   $(OBJ)
+	$(CC) -o $@ $(OBJ) $(LIB)
+
+.c.o:
+	$(CC) -c $<
+
+#
+# Clean out object files and the executable.
+#
+clean:
+	rm -fr *.o area
+

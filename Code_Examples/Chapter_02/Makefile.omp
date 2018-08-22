@@ -1,0 +1,26 @@
+# Makefile for mandelbrot area code
+
+#CC=    gcc -O3 -fopenmp
+CC=     pgcc -O3 -mp 
+#LIB=	-lm
+
+#
+# Object files
+#
+OBJ=    area.omp.o
+
+#
+# Compile
+#
+area.omp:   $(OBJ)
+	$(CC) -o $@ $(OBJ) $(LIB)
+
+.c.o:
+	$(CC) -c $<
+
+#
+# Clean out object files and the executable.
+#
+clean:
+	rm -fr *.o area.omp
+
