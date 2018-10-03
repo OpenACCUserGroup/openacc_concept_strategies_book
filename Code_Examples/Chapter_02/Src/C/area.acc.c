@@ -30,7 +30,7 @@ int main(){
  */
 #pragma acc parallel loop reduction(+:numoutside) private(i,j) 
   for (i=0; i<NPOINTS; i++) {
-#pragma acc loop vector private(c,z,found,c,z,iter,ztemp)
+#pragma acc loop vector private(c,z,found,iter,ztemp)
     for (j=0; j<NPOINTS; j++) {
       c.real = -2.0+2.5*(double)(i)/(double)(NPOINTS)+1.0e-7;
       c.imag = 1.125*(double)(j)/(double)(NPOINTS)+1.0e-7;
