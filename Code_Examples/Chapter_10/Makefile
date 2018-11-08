@@ -1,13 +1,13 @@
 CC=pgcc
-CFLAGS=-ta=tesla:pinned -Minfo=all
+CFLAGS=-Mcuda=cc60 -Minfo=all
 CXX=pgc++
-CXXFLAGS=-ta=tesla:pinned -Minfo=all
+CXXFLAGS=-Mcuda=cc60 -Minfo=all
 # It may be necessary to edit the line below to point to your installation of
 # OpenCV.
 OPENCV_FLAGS=-lopencv_highgui -lopencv_core
 
 filter.x: filter.o main.o
-	$(CXX) $(CXXFLAGS) -mp $^ $(OPENCV_FLAGS) -lm -o $@ -Mcuda -Minfo=all
+	$(CXX) $(CXXFLAGS) -mp $^ $(OPENCV_FLAGS) -lm -o $@
 
 .SUFFIXES: .o .cpp .c
 .cpp.o: 
